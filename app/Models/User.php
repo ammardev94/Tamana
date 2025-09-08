@@ -42,22 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    /**
-     * Get the profile associated with the user.
-     */
-    public function profile(): HasOne
+    public function role(): BelongsTo
     {
-        return $this->hasOne(Profile::class);
-    }
-
-    public function userRoles(): HasMany
-    {
-        return $this->hasMany(UserRole::class);
-    }
-
-    public function roles(): BelongsToMany
-    {
-        return $this->belongsToMany(Role::class, 'user_roles');
+        return $this->belongsTo(Role::class, 'role_id', 'id');
     }
 
 }

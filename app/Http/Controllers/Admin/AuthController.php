@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use Exception;
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Log;
-use App\Http\Controllers\Controller;
-use App\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
@@ -37,6 +37,7 @@ class AuthController extends Controller
      * @param  \Illuminate\Http\LoginRequest  $request
      * @return \Illuminate\Http\Response
      */
+    /*
     public function login_attempt(LoginRequest $request): RedirectResponse
     {
         try {
@@ -47,6 +48,7 @@ class AuthController extends Controller
             if (Auth::attempt($credentials, $remember)) {
                 
                 $user = Auth::user();
+                dd($user);
                 $hasRole = $user->roles->contains('code', 'admin');
                 Auth::logout();
 
@@ -71,6 +73,42 @@ class AuthController extends Controller
             return redirect()->back();
         }
     }
+    */
+
+    public function login_attempt(LoginRequest $request): RedirectResponse
+    {
+        try {
+
+            $credentials = $request->only('email', 'password');
+            $remember = $request->input('remember_me') ?? false;
+
+            $role = Role::where('code', 'admin')->first();
+            if (! $role) {
+                throw new Exception('Role not found');
+            }
+
+            $credentials['role_id'] = $role->id;
+
+            if (Auth::guard('admin')->attempt($credentials, $remember)) {
+
+                if (! empty($request->input('ref'))) {
+                    return redirect($request->input('ref'));
+                }
+
+                return redirect()->route('admin.dashboard');
+            }
+
+            Session::flash('msg.error', 'Invalid credentials');
+
+            return redirect()->back();
+        } catch (Exception $e) {
+            Log::error($e->getMessage());
+            Session::flash('msg.error', $e->getMessage());
+
+            return redirect()->back();
+        }
+    }
+
 
     /**
      * Handle logout for the admin guard.
