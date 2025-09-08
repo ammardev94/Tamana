@@ -26,14 +26,12 @@
                 <li>
                     <h6 class="submenu-hdr"><span>MENU</span></h6>
                     <ul>
-
-                        <li class="@if(request()->path() == 'admin/cms') active @endif">
-                            <a href="javascript:void(0);">
+                        <li class="@if(request()->path() == 'admin/cms/pages') active @endif">
+                            <a href="{{ route('cms.page.index') }}">
                                 <i class="ti ti-page-break"></i>
                                 <span>CMS</span>
                             </a>
                         </li>
-
                     </ul>
                 </li>
             </ul>

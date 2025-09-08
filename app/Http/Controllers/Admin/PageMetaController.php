@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\PageMetaFormRequest;
+use Exception;
+use Carbon\Carbon;
 use App\Models\Page;
 use App\Models\PageMeta;
-use Carbon\Carbon;
-use Exception;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Session;
-use Illuminate\View\View;
+use App\Http\Requests\PageMetaFormRequest;
 
 class PageMetaController extends Controller
 {
@@ -53,8 +53,6 @@ class PageMetaController extends Controller
         try {
             $validated = $request->validated();
             $validated['created_at'] = Carbon::now();
-
-            // dd($validated);
 
             PageMeta::create($validated);
 
