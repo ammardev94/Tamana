@@ -34,9 +34,9 @@
                     @csrf
                     @method('PUT')
                     <div class="text-center">
-                        @if (!empty($user->profile->img))                            
+                        @if (!empty(auth()->guard('admin')->user()->img))                            
                             <span class="profile-pic">
-                                <img id="profile-img" src="{{ asset('storage/'.$user->profile->img) }}" alt="{{ $user->name }}">
+                                <img id="profile-img" src="{{ asset('storage/'.auth()->guard('admin')->user()->img) }}" alt="{{ auth()->guard('admin')->user()->name }}">
                             </span>
                         @endif
                         <div class="title-upload">
@@ -50,8 +50,8 @@
                                 <span>Click to Upload</span> 
                             </p>
                         </div>
-                        @if (!empty($user->profile->img)) 
-                            <input type="hidden" id="existingImg" value="{{ $user->profile->img }}" />
+                        @if (!empty(auth()->guard('admin')->user()->img)) 
+                            <input type="hidden" id="existingImg" value="{{ auth()->guard('admin')->user()->img }}" />
                         @endif
                         <input type="file" id="img" name="img" class="form-control"/>
                     </div>
@@ -79,7 +79,7 @@
                                 name="name" 
                                 class="form-control"
                                 placeholder="Enter User Name"
-                                value="{{ $user->name }}" 
+                                value="{{ auth()->guard('admin')->user()->name }}" 
                                 />
                         </div>
                         <div class="form-group col-md-6 mb-3">
@@ -90,7 +90,7 @@
                                 name="email" 
                                 class="form-control" 
                                 placeholder="Enter Email"
-                                value="{{ $user->email }}"
+                                value="{{ auth()->guard('admin')->user()->email }}"
                                 disabled
                             />
                         </div>

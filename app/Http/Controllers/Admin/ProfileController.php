@@ -17,9 +17,7 @@ class ProfileController extends Controller
 
     public function index() 
     {
-        $user = Auth::guard('admin')->user();
-
-        return view('admin.profile', compact('user'));
+        return view('admin.profile');
     }
 
     public function update(Request $request)
@@ -27,31 +25,26 @@ class ProfileController extends Controller
         try {
 
             $user = Auth::guard('admin')->user();
-            
+            $payload = $request->except("_token", '_method', 'img');
+
+
             if ($request->hasFile('img')) {
 
-                $filename = $request->file('img')->store('profile', 'public');
-
-                $profile = Profile::where("user_id", $user->id)->first();
-                if ($profile) {
-                    Storage::disk('public')->delete($profile->img);
+                if (!is_null($user->img)) {
+                    Storage::disk('public')->delete($user->img);
                 }
 
-                Profile::updateOrCreate(
-                    [ "user_id" => $user->id ],
-                    [
-                        "img" => $filename
-                    ]
-                );
+
+                $filename = $request->file('img')->store('users', 'public');
+                $payload["img"] = $filename;
             }
 
-            $payload = $request->except("_token", '_method', 'img');
             User::whereId($user->id)->update($payload);
 
-            $user = User::findOrFail($user->id);
+            $user->refresh();
             
             Session::flash('msg.success', 'Profile updated successfully.');
-            return view('admin.profile', compact('user'));
+            return view('admin.profile');
         } catch (Exception $e) {
 
             Log::error($e->getMessage());

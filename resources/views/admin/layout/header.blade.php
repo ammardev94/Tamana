@@ -82,14 +82,14 @@
                     <a href="javascript:void(0);" class="dropdown-toggle d-flex align-items-center"
                         data-bs-toggle="dropdown">
                         <span class="avatar avatar-md rounded">
-                            <img src="{{ asset('storage/' . (optional(auth()->guard('admin')->user()->profile)->img ?? 'profile/default.jpg')) }}" alt="Img" class="img-fluid">
+                            <img src="{{ asset('storage/' . (optional(auth()->guard('admin')->user())->img ?? 'users/default.jpg')) }}" alt="Img" class="img-fluid">
                         </span>
                     </a>
                     <div class="dropdown-menu">
                         <div class="d-block">
                             <div class="d-flex align-items-center p-2">
                                 <span class="avatar avatar-md me-2 online avatar-rounded">
-                                    <img src="{{ asset('storage/' . (optional(auth()->guard('admin')->user()->profile)->img ?? 'profile/default.jpg')) }}" alt="img">
+                                    <img src="{{ asset('storage/' . (optional(auth()->guard('admin')->user())->img ?? 'users/default.jpg')) }}" alt="img">
                                 </span>
                                 <div>
                                     <h6>{{ auth()->guard('admin')->user()->name }}</h6>

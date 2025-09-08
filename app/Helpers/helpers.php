@@ -7,18 +7,6 @@ if (! function_exists('dashboard_url')) {
             return route('admin.dashboard');
         }
 
-        if (auth()->guard('tutor')->check()) {
-            return route('tutor.dashboard');
-        }
-
-        if (auth()->guard('parent')->check()) {
-            return route('parent.dashboard');
-        }
-
-        if (auth()->guard('student')->check()) {
-            return route('student.dashboard');
-        }
-
         return url('/');
     }
 }
