@@ -2,12 +2,12 @@
 
 @section('content')
 
-<div class="row justify-content-center">
+<div class="row justify-content-center mt-4">
     <div class="col-md-5 mx-auto">
         <form action="{{ route('admin.login.attempt') }}" method="POST">
             @csrf
             <div class="d-flex flex-column justify-content-between vh-100">
-                <div class="mx-auto p-4 text-center">
+                <div class="mx-auto pt-4 text-center">
                     <a href="{{ route('site.index') }}">
                         <img src="{{ asset('images/logo.png') }}" class="img-fluid" alt="Logo" width="300px">
                     </a>
