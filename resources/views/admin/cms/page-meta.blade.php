@@ -47,7 +47,7 @@
                             @foreach($page->pageMetas as $pageMeta)
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
-                                        <label for="{{ $pageMeta->ref_key }}">{{ $pageMeta->ref_key }}</label>
+                                        <label class="form-label" for="{{ $pageMeta->ref_key }}">{{ ucwords(str_replace('_', ' ', $pageMeta->ref_key)) }}</label>
                                         <textarea class="form-control" name="{{ $pageMeta->ref_key }}">{{ $pageMeta->ref_value }}</textarea>
                                     </div>
                                 </div>
@@ -64,7 +64,9 @@
 
                                 <div class="col-md-6 mb-3">
                                     <div class="form-group">
-                                        <label for="{{ $pageFile->ref_point }}">{{ $pageFile->ref_point }}</label>
+                                        <label class="form-label" for="{{ $pageFile->ref_point }}">
+                                            {{ ucwords(str_replace('_', ' ', $pageFile->ref_point)) }}
+                                        </label>
                                         <input 
                                             type="file" 
                                             class="form-control" 
