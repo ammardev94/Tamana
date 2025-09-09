@@ -34,62 +34,102 @@
         @include('include.messages')
         <div class="card card-primary">
             <div class="card-header">
-                <h3 class="card-title">Edit Page Meta</h3>
+                <h3 class="card-title">Edit Page Meta ({{ $page->title }})</h3>
             </div>
             <!-- /.card-header -->
+
+            @php
+                // Group metas by section prefix
+                $metaGroups = collect($page->pageMetas)->groupBy(function($item) {
+                    $parts = explode('_', $item->ref_key);
+                    return $parts[0] . '_' . $parts[1]; // e.g. section_one
+                });
+
+                // Group files by section prefix
+                $fileGroups = collect($page->pageFiles)->groupBy(function($item) {
+                    $parts = explode('_', $item->ref_point);
+                    return $parts[0] . '_' . $parts[1]; // e.g. section_one
+                });
+
+                // Combine all section keys from both metas and files
+                $allSections = $metaGroups->keys()->merge($fileGroups->keys())->unique();
+
+                // Build final sections array
+                $sections = collect();
+                foreach ($allSections as $section) {
+                    $sections[$section] = [
+                        'metas' => $metaGroups->get($section, collect()), // fallback to empty collection
+                        'files' => $fileGroups->get($section, collect()),
+                    ];
+                }
+            @endphp
+            
             <!-- form start -->
             <form action="{{ route('cms.page.meta.update', [$page->id]) }}" method="POST" id="addPageForm" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="_method" value="PATCH">
                 <div class="card-body">
                     <div class="row">
-                        @if($page->pageMetas)
-                            @foreach($page->pageMetas as $pageMeta)
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label class="form-label" for="{{ $pageMeta->ref_key }}">{{ ucwords(str_replace('_', ' ', $pageMeta->ref_key)) }}</label>
-                                        <textarea class="form-control" name="{{ $pageMeta->ref_key }}">{{ $pageMeta->ref_value }}</textarea>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
-                        @if($page->pageFiles)
-                            @foreach($page->pageFiles as $pageFile)
+                        <div class="accordion accordion-primary">
+                            
+                            @foreach($sections as $sectionName => $data)
                                 @php
-                                    $fileUrl = $pageFile->path ? asset('storage/' . $pageFile->path) : null;
-                                    $extension = $pageFile->path ? strtolower(pathinfo($pageFile->path, PATHINFO_EXTENSION)) : null;
-                                    $isImage = in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
-                                    $isVideo = in_array($extension, ['mp4', 'webm', 'ogg']);
+                                    $isFirst = $loop->first; // Check if first iteration
                                 @endphp
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header" id="heading-{{ $sectionName }}">
+                                        <button class="accordion-button {{ $isFirst ? '' : 'collapsed' }}" type="button"
+                                                data-bs-toggle="collapse"
+                                                data-bs-target="#collapse-{{ $sectionName }}">
+                                            {{ ucwords(str_replace('_', ' ', $sectionName)) }}
+                                        </button>
+                                    </h2>
+                                    <div id="collapse-{{ $sectionName }}"
+                                        class="accordion-collapse collapse {{ $isFirst ? 'show' : '' }}"
+                                        data-bs-parent="#cmsAccordion">
+                                        <div class="accordion-body">
+                                            <div class="row">
+                                                {{-- Page Metas --}}
+                                                @foreach($data['metas'] as $pageMeta)
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label" for="{{ $pageMeta->ref_key }}">
+                                                            {{ ucwords(str_replace('_', ' ', $pageMeta->ref_key)) }}
+                                                        </label>
+                                                        <textarea class="form-control" name="{{ $pageMeta->ref_key }}">{{ $pageMeta->ref_value }}</textarea>
+                                                    </div>
+                                                @endforeach
 
-                                <div class="col-md-6 mb-3">
-                                    <div class="form-group">
-                                        <label class="form-label" for="{{ $pageFile->ref_point }}">
-                                            {{ ucwords(str_replace('_', ' ', $pageFile->ref_point)) }}
-                                        </label>
-                                        <input 
-                                            type="file" 
-                                            class="form-control" 
-                                            name="{{ $pageFile->ref_point }}" 
-                                            id="{{ $pageFile->ref_point }}" 
-                                            placeholder="Browse file"
-                                        >
-
-                                        @if($fileUrl)
-                                            @if($isImage)
-                                                <img src="{{ $fileUrl }}" alt="{{ $pageFile->alt_text }}" style="max-width: 100%; height: 200px;">
-                                            @elseif($isVideo)
-                                                <video controls style="max-width: 100%; height: 200px;">
-                                                    <source src="{{ $fileUrl }}" type="video/{{ $extension }}">
-                                                    Your browser does not support the video tag.
-                                                </video>
-                                            @endif
-                                        @endif
+                                                {{-- Page Files --}}
+                                                @foreach($data['files'] as $pageFile)
+                                                    @php
+                                                        $fileUrl = $pageFile->path ? asset('storage/' . $pageFile->path) : null;
+                                                        $extension = $pageFile->path ? strtolower(pathinfo($pageFile->path, PATHINFO_EXTENSION)) : null;
+                                                        $isImage = in_array($extension, ['jpg', 'jpeg', 'png', 'gif', 'webp']);
+                                                        $isVideo = in_array($extension, ['mp4', 'webm', 'ogg']);
+                                                    @endphp
+                                                    <div class="col-md-6 mb-3">
+                                                        <label class="form-label" for="{{ $pageFile->ref_point }}">
+                                                            {{ ucwords(str_replace('_', ' ', $pageFile->ref_point)) }}
+                                                        </label>
+                                                        <input type="file" class="form-control" name="{{ $pageFile->ref_point }}" id="{{ $pageFile->ref_point }}">
+                                                        @if($fileUrl)
+                                                            @if($isImage)
+                                                                <img src="{{ $fileUrl }}" alt="{{ $pageFile->alt_text }}" style="max-width: 100%; height: 200px;">
+                                                            @elseif($isVideo)
+                                                                <video controls style="max-width: 100%; height: 200px;">
+                                                                    <source src="{{ $fileUrl }}" type="video/{{ $extension }}">
+                                                                </video>
+                                                            @endif
+                                                        @endif
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
-                        @endif
 
+                        </div>
                     </div>
                 </div>
                 <!-- /.card-body -->
@@ -98,6 +138,7 @@
                     <a href="{{ route('cms.page.index') }}" class="btn btn-default"><i class="fas fa-times-circle"></i>&nbsp;&nbsp;Cancel</a>
                 </div>
             </form>
+            <!-- form end -->
         </div>
     </div>
 </div>

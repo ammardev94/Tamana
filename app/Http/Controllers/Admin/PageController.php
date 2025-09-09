@@ -140,6 +140,8 @@ class PageController extends Controller
             ->with(['pageMetas', 'pageFiles'])
             ->first();
 
+        // dd($page);
+
         return view('admin.cms.page-meta', ['page' => $page]);
     }
 
