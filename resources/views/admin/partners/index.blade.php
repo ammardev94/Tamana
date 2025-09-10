@@ -50,7 +50,6 @@
                     <thead>
                         <tr>
                             <th>Thumbnail</th>
-                            <th>Logo</th>
                             <th>Name</th>
                             <th>Created At</th>
                             <th class="text-center">Action</th>
@@ -61,15 +60,8 @@
                         <tr>
                             <td>
                                 @if($item->thumbnail_img)
-                                    <span class="avatar avatar-xxxl me-2">
+                                    <span class="avatar avatar-lg me-2">
                                         <img src="{{ asset('storage/'.$item->thumbnail_img) }}" alt="{{ $item->name }}">
-                                    </span>
-                                @endif
-                            </td>
-                            <td>
-                                @if($item->logo)
-                                    <span class="avatar me-2">
-                                        <img src="{{ asset('storage/'.$item->logo) }}" alt="{{ $item->name }}">
                                     </span>
                                 @endif
                             </td>
