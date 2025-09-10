@@ -36,28 +36,28 @@
 
                         <li class="@if(request()->path() == 'admin/news') active @endif">
                             <a href="{{ route('admin.news.index') }}">
-                                <i class="ti ti-page-break"></i>
+                                <i class="ti ti-news"></i>
                                 <span>News</span>
                             </a>
                         </li>
 
                         <li class="@if(request()->path() == 'admin/teams') active @endif">
                             <a href="{{ route('admin.teams.index') }}">
-                                <i class="ti ti-page-break"></i>
+                                <i class="ti ti-users-group"></i>
                                 <span>Teams</span>
                             </a>
                         </li>
 
                         <li class="@if(request()->path() == 'admin/portfolio') active @endif">
                             <a href="{{ route('admin.portfolio.index') }}">
-                                <i class="ti ti-page-break"></i>
+                                <i class="ti ti-building-estate"></i>
                                 <span>Portfolio</span>
                             </a>
                         </li>
 
-                        <li class="@if(request()->path() == 'admin/portfolio') active @endif">
+                        <li class="@if(request()->path() == 'admin/partners') active @endif">
                             <a href="{{ route('admin.partners.index') }}">
-                                <i class="ti ti-page-break"></i>
+                                <i class="ti ti-building-skyscraper"></i>
                                 <span>Partners</span>
                             </a>
                         </li>
