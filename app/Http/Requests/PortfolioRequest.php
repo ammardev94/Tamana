@@ -41,6 +41,7 @@ class PortfolioRequest extends FormRequest
             'contract_terms' => 'nullable|string|max:255',
             'awards' => 'nullable|string|max:255',
             'other_information' => 'nullable|string|max:500',
+            'status' => 'string|in:in-progress,completed',
         ];
     }
 

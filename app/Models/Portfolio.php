@@ -29,6 +29,7 @@ class Portfolio extends Model
         'contract_terms',
         'awards',
         'other_information',
+        'status',
     ];
 
     protected $casts = [

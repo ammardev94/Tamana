@@ -135,6 +135,15 @@
                         </div>
 
                         <div class="col-md-6 mb-3">
+                            <label for="status" class="form-label">Status</label>
+                            <select class="form-select" name="status" id="status">
+                                <option value="in-progress" {{ $portfolio->status == 'in-progress' ? 'selected': '' }}>In Progress</option>
+                                <option value="completed" {{ $portfolio->status == 'completed' ? 'selected': '' }}>Completed</option>
+                            </select>
+                        </div>
+
+
+                        <div class="col-md-6 mb-3">
                             <label for="thumbnail_img" class="form-label">Thumbnail Image</label>
                             <input type="file" name="thumbnail_img" id="thumbnail_img" class="form-control">
                             @if($portfolio->thumbnail_img)
