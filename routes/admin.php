@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProfileController;
+use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PageMetaController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -75,6 +76,13 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->name('admin.portfolio.edit');
         Route::put('/portfolio/{id}/update', [PortfolioController::class, 'update'])->name('admin.portfolio.update');
         Route::delete('/portfolio/{id}/delete', [PortfolioController::class, 'destroy'])->name('admin.portfolio.destroy');
+
+        Route::get('/partners', [PartnerController::class, 'index'])->name('admin.partners.index');
+        Route::get('/partners/create', [PartnerController::class, 'create'])->name('admin.partners.create');
+        Route::post('/partners/store', [PartnerController::class, 'store'])->name('admin.partners.store');
+        Route::get('/partners/{id}/edit', [PartnerController::class, 'edit'])->name('admin.partners.edit');
+        Route::put('/partners/{id}/update', [PartnerController::class, 'update'])->name('admin.partners.update');
+        Route::delete('/partners/{id}/delete', [PartnerController::class, 'destroy'])->name('admin.partners.destroy');
 
     });
 });
