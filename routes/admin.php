@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PageController;
@@ -58,6 +59,15 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/news/{id}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
         Route::put('/news/{id}/update', [NewsController::class, 'update'])->name('admin.news.update');
         Route::delete('/news/{id}/delete', [NewsController::class, 'destroy'])->name('admin.news.destroy');
+
+
+        Route::get('/teams', [TeamController::class, 'index'])->name('admin.teams.index');
+        Route::get('/teams/create', [TeamController::class, 'create'])->name('admin.teams.create');
+        Route::post('/teams/store', [TeamController::class, 'store'])->name('admin.teams.store');
+        Route::get('/teams/{id}/edit', [TeamController::class, 'edit'])->name('admin.teams.edit');
+        Route::put('/teams/{id}/update', [TeamController::class, 'update'])->name('admin.teams.update');
+        Route::delete('/teams/{id}/delete', [TeamController::class, 'destroy'])->name('admin.teams.destroy');
+
 
     });
 });

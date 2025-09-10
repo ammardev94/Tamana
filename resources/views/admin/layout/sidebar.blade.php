@@ -40,6 +40,14 @@
                                 <span>News</span>
                             </a>
                         </li>
+
+                        <li class="@if(request()->path() == 'admin/teams') active @endif">
+                            <a href="{{ route('admin.teams.index') }}">
+                                <i class="ti ti-page-break"></i>
+                                <span>Teams</span>
+                            </a>
+                        </li>
+
                     </ul>
                 </li>
             </ul>

@@ -53,7 +53,6 @@
                             <th></th>
                             <th>Author</th>
                             <th>Title</th>
-                            <th>Description</th>
                             <th>Created At</th>
                             <th class="text-center">Action</th>
                         </tr>
@@ -88,7 +87,6 @@
                                 </div>
                             </td>
                             <td>{!! $item->title !!}</td>
-                            <td>{{ \Illuminate\Support\Str::limit(strip_tags($item->description), 100) }}</td>
                             <td>{{ $item->created_at->format('F d, Y') }}</td>
                             <td class="text-center">
                                 <div class='btn-group'>
