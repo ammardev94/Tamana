@@ -48,6 +48,14 @@
                             </a>
                         </li>
 
+                        <li class="@if(request()->path() == 'admin/portfolio') active @endif">
+                            <a href="{{ route('admin.portfolio.index') }}">
+                                <i class="ti ti-page-break"></i>
+                                <span>Portfolio</span>
+                            </a>
+                        </li>
+
+
                     </ul>
                 </li>
             </ul>

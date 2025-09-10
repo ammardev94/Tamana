@@ -9,7 +9,7 @@
         .swal2-confirm.red-button {
             background-color: red !important;
             border-color: red !important;
-            color: white !important; /* Optional: change text color for better contrast */
+            color: white !important;
         }
     </style>
 @endsection
@@ -18,7 +18,7 @@
 <!-- Page Header -->
 <div class="d-md-flex d-block align-items-center justify-content-between mb-3">
     <div class="my-auto mb-2">
-        <h3 class="page-title mb-1">News</h3>
+        <h3 class="page-title mb-1">Portfolio</h3>
     </div>
     <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
         <nav>
@@ -26,7 +26,7 @@
                 <li class="breadcrumb-item">
                     <a href="{{ route('admin.dashboard') }}">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active" aria-current="page">News</li>
+                <li class="breadcrumb-item active" aria-current="page">Portfolio</li>
             </ol>
         </nav>
     </div>
@@ -39,8 +39,8 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h3 class="card-title mb-0">News</h3>
-                    <a class="btn btn-primary" href="{{ route('admin.news.create') }}">
+                    <h3 class="card-title mb-0">Portfolios</h3>
+                    <a class="btn btn-primary" href="{{ route('admin.portfolio.create') }}">
                         <i class="fas fa-solid fa-plus"></i>
                     </a>
                 </div>
@@ -50,48 +50,34 @@
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th></th>
-                            <th>Author</th>
+                            <th>Thumbnail</th>
                             <th>Title</th>
+                            <th>Location</th>
+                            <th>Client</th>
                             <th>Created At</th>
                             <th class="text-center">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($news as $item)
+                        @foreach($portfolios as $item)
                         <tr>
                             <td>
-								<span class="avatar avatar-xxxl me-2">
-                                    <img src="{{ asset('storage/'.$item->img) }}" alt="{{ $item->title }}">
-								</span>
+                                @if($item->thumbnail_img)
+                                    <span class="avatar avatar-xxxl me-2">
+                                        <img src="{{ asset('storage/'.$item->thumbnail_img) }}" alt="{{ $item->title }}">
+                                    </span>
+                                @endif
                             </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    @if($item->author_img)
-                                        <img src="{{ asset('storage/'.$item->author_img) }}" alt="{{ $item->author_name }}" class="avatar me-2">
-                                    @endif
-                                    <div>
-                                        {{ $item->author_name }}
-                                        <div>
-                                            @if($item->author_youtube)
-                                                <a href="{{ $item->author_youtube }}" target="_blank"><i class="fab fa-youtube"></i></a>
-                                            @endif
-                                            @if($item->author_facebook)
-                                                <a href="{{ $item->author_facebook }}" target="_blank"><i class="fab fa-facebook"></i></a>
-                                            @endif
-                                            @if($item->author_linkdin)
-                                                <a href="{{ $item->author_linkdin }}" target="_blank"><i class="fab fa-linkedin"></i></a>
-                                            @endif
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>{!! $item->title !!}</td>
+                            <td>{{ $item->title }}</td>
+                            <td>{{ $item->location }}</td>
+                            <td>{{ $item->client }}</td>
                             <td>{{ $item->created_at->format('F d, Y') }}</td>
                             <td class="text-center">
                                 <div class='btn-group'>
-                                    <a href="{{ route('admin.news.edit', $item->id) }}" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a>
-                                    <form class="delete-news-form" action="{{ route('admin.news.destroy', $item->id) }}" method="POST">
+                                    <a href="{{ route('admin.portfolio.edit', $item->id) }}" class="btn btn-default btn-sm">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <form class="delete-portfolio-form" action="{{ route('admin.portfolio.destroy', $item->id) }}" method="POST">
                                         @method('DELETE')
                                         @csrf
                                         <button type="submit" class="btn btn-default btn-sm">
@@ -105,10 +91,10 @@
                     </tbody>
                 </table>
             </div>
-            @if($news->total() > 2)
+            @if($portfolios->total() > 2)
             <div class="card-footer">
                 <div class="d-flex justify-content-end">
-                    {{ $news->links('vendor.pagination.bootstrap-4') }}
+                    {{ $portfolios->links('vendor.pagination.bootstrap-4') }}
                 </div>
             </div>
             @endif
@@ -121,13 +107,13 @@
 @section('js')
 <script>
     $(document).ready(function () {
-        $(".delete-news-form").on("submit", function (e) {
+        $(".delete-portfolio-form").on("submit", function (e) {
             e.preventDefault();
 
             Swal.fire({
                 title: "<strong>Are you sure?</strong>",
                 icon: "warning",
-                html: `<p>Do you really want to delete this news?</p>`,
+                html: `<p>Do you really want to delete this portfolio?</p>`,
                 showCloseButton: true,
                 showCancelButton: true,
                 focusConfirm: false,

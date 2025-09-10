@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PageMetaController;
+use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationController;
 
@@ -68,6 +69,12 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/teams/{id}/update', [TeamController::class, 'update'])->name('admin.teams.update');
         Route::delete('/teams/{id}/delete', [TeamController::class, 'destroy'])->name('admin.teams.destroy');
 
+        Route::get('/portfolio', [PortfolioController::class, 'index'])->name('admin.portfolio.index');
+        Route::get('/portfolio/create', [PortfolioController::class, 'create'])->name('admin.portfolio.create');
+        Route::post('/portfolio/store', [PortfolioController::class, 'store'])->name('admin.portfolio.store');
+        Route::get('/portfolio/{id}/edit', [PortfolioController::class, 'edit'])->name('admin.portfolio.edit');
+        Route::put('/portfolio/{id}/update', [PortfolioController::class, 'update'])->name('admin.portfolio.update');
+        Route::delete('/portfolio/{id}/delete', [PortfolioController::class, 'destroy'])->name('admin.portfolio.destroy');
 
     });
 });

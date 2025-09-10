@@ -1,0 +1,258 @@
+@extends('admin.default')
+
+@section('css')
+<style>
+    .error {
+        color: red;
+        font-size: 0.875em;
+    }
+
+    .is-invalid {
+        border-color: #dc3545;
+    }
+
+    .is-valid {
+        border-color: #28a745;
+    }
+
+    .invalid-feedback {
+        color: #dc3545;
+        font-size: 0.875em;
+    }
+
+    .note-editor.note-frame .note-editing-area .note-editable {
+        height: 200px !important;
+    }
+</style>
+@endsection
+
+@section('content')
+
+<!-- Page Header -->
+<div class="d-md-flex d-block align-items-center justify-content-between mb-3">
+    <div class="my-auto mb-2">
+        <h3 class="page-title mb-1">Portfolio</h3>
+    </div>
+    <div class="d-flex my-xl-auto right-content align-items-center flex-wrap">
+        <nav>
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('admin.portfolio.index') }}">Portfolio</a></li>
+                <li class="breadcrumb-item active">Add Portfolio</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- /Page Header -->
+
+<div class="row">
+    <div class="col-md-12">
+        @include('include.messages')
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Add Portfolio</h3>
+            </div>
+
+            <form action="{{ route('admin.portfolio.store') }}" method="POST" id="addPortfolio" enctype="multipart/form-data">
+                @csrf
+                <div class="card-body">
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <label for="title" class="form-label">Title</label>
+                            <input type="text" name="title" id="title" class="form-control" value="{{ old('title') }}" placeholder="Enter title">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="location" class="form-label">Location</label>
+                            <input type="text" name="location" id="location" class="form-control" value="{{ old('location') }}" placeholder="Enter location">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="client" class="form-label">Client</label>
+                            <input type="text" name="client" id="client" class="form-control" value="{{ old('client') }}" placeholder="Enter client name">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="value" class="form-label">Value</label>
+                            <input type="text" name="value" id="value" class="form-control" value="{{ old('value') }}" placeholder="Enter project value">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="consortium" class="form-label">Consortium</label>
+                            <input type="text" name="consortium" id="consortium" class="form-control" value="{{ old('consortium') }}" placeholder="Enter consortium">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="tanama_role" class="form-label">Tanama Role</label>
+                            <input type="text" name="tanama_role" id="tanama_role" class="form-control" value="{{ old('tanama_role') }}" placeholder="Enter Tanama role">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="builder" class="form-label">Builder</label>
+                            <input type="text" name="builder" id="builder" class="form-control" value="{{ old('builder') }}" placeholder="Enter builder name">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="architect" class="form-label">Architect</label>
+                            <input type="text" name="architect" id="architect" class="form-control" value="{{ old('architect') }}" placeholder="Enter architect name">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="financial_close_date" class="form-label">Financial Close Date</label>
+                            <input type="text" name="financial_close_date" id="financial_close_date" class="form-control" value="{{ old('financial_close_date') }}" placeholder="e.g. May 2018">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="completion_date" class="form-label">Completion Date</label>
+                            <input type="text" name="completion_date" id="completion_date" class="form-control" value="{{ old('completion_date') }}" placeholder="e.g. September 2020">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="contract_terms" class="form-label">Contract Terms</label>
+                            <input type="text" name="contract_terms" id="contract_terms" class="form-control" value="{{ old('contract_terms') }}" placeholder="Enter contract terms">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="awards" class="form-label">Awards</label>
+                            <input type="text" name="awards" id="awards" class="form-control" value="{{ old('awards') }}" placeholder="Enter awards">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="map_url" class="form-label">Map URL</label>
+                            <input type="url" name="map_url" id="map_url" class="form-control" value="{{ old('map_url') }}" placeholder="http://">
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="map" class="form-label">Embedded Map (iframe HTML)</label>
+                            <textarea name="map" id="map" class="form-control" rows="3" placeholder="Enter iframe HTML">{{ old('map') }}</textarea>
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label for="other_information" class="form-label">Other Information</label>
+                            <textarea name="other_information" id="other_information" class="form-control" rows="3">{{ old('other_information') }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="thumbnail_img" class="form-label">Thumbnail Image</label>
+                            <input type="file" name="thumbnail_img" id="thumbnail_img" class="form-control">
+                            <img src="" alt="" style="max-width: 100%; height: 200px; display:none;">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="images" class="form-label">Gallery Images (Multiple)</label>
+                            <input type="file" name="images[]" id="images" class="form-control" multiple>
+                            <div id="preview-images" class="mt-2"></div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>&nbsp;&nbsp;Save</button>
+                    <a href="{{ route('admin.portfolio.index') }}" class="btn btn-default"><i class="fas fa-times-circle"></i>&nbsp;&nbsp;Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+@endsection
+
+@section('js')
+<script>
+$(document).ready(function() {
+    $.validator.addMethod('extension', function (value, element, allowedExtensions) {
+        var extension = value.split('.').pop().toLowerCase();
+        return $.inArray(extension, allowedExtensions) !== -1;
+    }, 'Invalid file type');
+
+
+    $.validator.addMethod('googleMapEmbed', function (value, element) {
+        if ($.trim(value) === '') return false;
+        var regex = /^<iframe.*src="https:\/\/www\.google\.com\/maps\/embed\?.*<\/iframe>$/i;
+        return regex.test(value.trim());
+    }, 'Please enter a valid Google Maps embed iframe.');
+
+    $.validator.addMethod('googleMapUrl', function (value, element) {
+        if ($.trim(value) === '') return false;
+        var regex = /^(https:\/\/maps\.app\.goo\.gl\/[A-Za-z0-9]+|https:\/\/goo\.gl\/maps\/[A-Za-z0-9]+|https:\/\/www\.google\.com\/maps\/.+)$/i;
+        return regex.test(value.trim());
+    }, 'Please enter a valid Google Maps URL.');
+
+    $("#addPortfolio").validate({
+        rules: {
+            thumbnail_img: { required: true, extension: ['jpg', 'jpeg', 'png', 'webp'] },
+            'images[]': { required: true, extension: ['jpg', 'jpeg', 'png', 'webp'] },
+            title: { required: true },
+            location: { required: true },
+            map: { required: true, googleMapEmbed: true },
+            map_url: { required: true, googleMapUrl: true },
+            client: { required: true },
+            value: { required: true },
+            consortium: { required: true },
+            tanama_role: { required: true },
+            builder: { required: true },
+            architect: { required: true },
+            financial_close_date: { required: true },
+            completion_date: { required: true },
+            contract_terms: { required: true },
+            awards: { required: true },
+            other_information: { required: true }
+        },
+        messages: {
+            thumbnail_img: { required: "Please upload thumbnail image", extension: "Only jpg, jpeg, png, webp allowed" },
+            'images[]': { required: "Please upload project images", extension: "Only jpg, jpeg, png, webp allowed" },
+            title: { required: "Please enter title" },
+            location: { required: "Please enter location" },
+            map: { required: "Please enter embedded map HTML" },
+            map_url: { required: "Please enter Google map URL" },
+            client: { required: "Please enter client name" },
+            value: { required: "Please enter value" },
+            consortium: { required: "Please enter consortium" },
+            tanama_role: { required: "Please enter Tanama role" },
+            builder: { required: "Please enter builder name" },
+            architect: { required: "Please enter architect name" },
+            financial_close_date: { required: "Please enter financial close date" },
+            completion_date: { required: "Please enter completion date" },
+            contract_terms: { required: "Please enter contract terms" },
+            awards: { required: "Please enter awards" },
+            other_information: { required: "Please enter other information" }
+        },
+        errorElement: "label",
+        validClass: "is-valid",
+        errorClass: "is-invalid text-danger",
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass(errorClass).addClass(validClass);
+        },
+        submitHandler: function(form) {
+            form.submit();
+        }
+    });
+
+    $('#thumbnail_img').on('change', function() {
+        var file = this.files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#thumbnail_img').siblings('img').attr('src', e.target.result).show();
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    $('#images').on('change', function() {
+        $('#preview-images').empty();
+        Array.from(this.files).forEach(file => {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                $('#preview-images').append('<img src="'+e.target.result+'" style="max-width: 100px; height: 100px; margin: 5px;">');
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+});
+</script>
+@endsection
