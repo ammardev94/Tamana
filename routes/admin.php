@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PageController;
+use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PageMetaController;
@@ -83,6 +84,14 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/partners/{id}/edit', [PartnerController::class, 'edit'])->name('admin.partners.edit');
         Route::put('/partners/{id}/update', [PartnerController::class, 'update'])->name('admin.partners.update');
         Route::delete('/partners/{id}/delete', [PartnerController::class, 'destroy'])->name('admin.partners.destroy');
+
+        Route::get('/services', [ServiceController::class, 'index'])->name('admin.services.index');
+        Route::get('/services/create', [ServiceController::class, 'create'])->name('admin.services.create');
+        Route::post('/services/store', [ServiceController::class, 'store'])->name('admin.services.store');
+        Route::get('/services/{id}/edit', [ServiceController::class, 'edit'])->name('admin.services.edit');
+        Route::put('/services/{id}/update', [ServiceController::class, 'update'])->name('admin.services.update');
+        Route::delete('/services/{id}/delete', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
+
 
     });
 });

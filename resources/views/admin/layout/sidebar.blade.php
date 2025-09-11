@@ -62,6 +62,13 @@
                             </a>
                         </li>
 
+                        <li class="@if(request()->path() == 'admin/services') active @endif">
+                            <a href="{{ route('admin.services.index') }}">
+                                <i class="ti ti-building-skyscraper"></i>
+                                <span>Services</span>
+                            </a>
+                        </li>
+
 
                     </ul>
                 </li>
