@@ -30,7 +30,7 @@ return new class extends Migration
             $table->string('contract_terms')->nullable();
             $table->string('awards')->nullable();
             $table->text('other_information')->nullable();
-            $table->enum('status', ['completed', 'in-progress'])->default('in-progresss');
+            $table->enum('status', ['completed', 'in-progress'])->default('in-progress');
             $table->timestamps();
         });
     }
