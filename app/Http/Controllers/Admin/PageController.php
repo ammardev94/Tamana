@@ -28,7 +28,7 @@ class PageController extends Controller
     {
         Log::info($request->method().' '.$request->url());
 
-        $pages = Page::with('user')->paginate(5);
+        $pages = Page::with('user')->paginate(10);
 
         return view('admin.cms.page.index', ['pages' => $pages]);
     }
@@ -139,8 +139,6 @@ class PageController extends Controller
         $page = Page::whereId($id)
             ->with(['pageMetas', 'pageFiles'])
             ->first();
-
-        // dd($page);
 
         return view('admin.cms.page-meta', ['page' => $page]);
     }

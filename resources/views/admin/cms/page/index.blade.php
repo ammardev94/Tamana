@@ -75,13 +75,13 @@
                                         {{-- <a href="javascript:void(0);" class="btn btn-default btn-sm"><i class="fas fa-solid fa-eye"></i></a> --}}
                                         <a href="{{ route('cms.page.edit', [$page->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-edit"></i></a>
                                         @if($page->type == 1)
-                                        <form class="delete-page-form" action="{{ route('cms.page.destroy', $page->id) }}" method="POST">
-                                            @method('DELETE')
-                                            @csrf
-                                            <button type="submit" class="btn btn-default btn-sm">
-                                                <i class="fas fa-solid fa-trash"></i>
-                                            </button>
-                                        </form>
+                                            <form class="delete-page-form" action="{{ route('cms.page.destroy', $page->id) }}" method="POST">
+                                                @method('DELETE')
+                                                @csrf
+                                                <button type="submit" class="btn btn-default btn-sm">
+                                                    <i class="fas fa-solid fa-trash"></i>
+                                                </button>
+                                            </form>
                                         @endif
                                         <a href="{{ route('cms.page.meta', [$page->id]) }}" class="btn btn-default btn-sm"><i class="fas fa-file"></i></a>
                                     </div>
