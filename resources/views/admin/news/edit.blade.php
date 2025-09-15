@@ -1,4 +1,3 @@
-{{-- resources/views/admin/news/edit.blade.php --}}
 @extends('admin.default')
 
 @section('css')

@@ -69,6 +69,12 @@
                             </a>
                         </li>
 
+                        <li class="@if(request()->path() == 'admin/seo-scripts/1/edit') active @endif">
+                            <a href="{{ route('admin.seo-scripts.edit', [1]) }}">
+                                <i class="ti ti-building-skyscraper"></i>
+                                <span>Seo Scripts</span>
+                            </a>
+                        </li>
 
                     </ul>
                 </li>

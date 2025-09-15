@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PartnerController;
 use App\Http\Controllers\Admin\PageMetaController;
+use App\Http\Controllers\Admin\SeoScriptController;
 use App\Http\Controllers\Admin\PortfolioController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\NotificationController;
@@ -92,6 +93,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/services/{id}/update', [ServiceController::class, 'update'])->name('admin.services.update');
         Route::delete('/services/{id}/delete', [ServiceController::class, 'destroy'])->name('admin.services.destroy');
 
+        Route::get('/seo-scripts/{id}/edit', [SeoScriptController::class, 'edit'])->name('admin.seo-scripts.edit');
+        Route::put('/seo-scripts/{id}/update', [SeoScriptController::class, 'update'])->name('admin.seo-scripts.update');
 
     });
 });
