@@ -41,4 +41,11 @@ class Page extends Model
     {
         return $this->hasMany(PageFile::class, 'ref_id');
     }
+
+    public function seoPage()
+    {
+        return $this->hasOne(SeoPage::class, 'page_id');
+    }
+
+
 }

@@ -76,6 +76,14 @@
                             </a>
                         </li>
 
+                        <li class="@if(request()->path() == 'admin/seo-pages') active @endif">
+                            <a href="{{ route('admin.seo_pages.index') }}">
+                                <i class="ti ti-building-skyscraper"></i>
+                                <span>Seo Pages</span>
+                            </a>
+                        </li>
+
+
                     </ul>
                 </li>
             </ul>

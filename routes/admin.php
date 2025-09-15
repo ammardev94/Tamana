@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ProfileController;
 use App\Http\Controllers\Admin\PartnerController;
+use App\Http\Controllers\Admin\SeoPageController;
 use App\Http\Controllers\Admin\PageMetaController;
 use App\Http\Controllers\Admin\SeoScriptController;
 use App\Http\Controllers\Admin\PortfolioController;
@@ -95,6 +96,13 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/seo-scripts/{id}/edit', [SeoScriptController::class, 'edit'])->name('admin.seo-scripts.edit');
         Route::put('/seo-scripts/{id}/update', [SeoScriptController::class, 'update'])->name('admin.seo-scripts.update');
+
+        Route::get('/seo-pages', [SeoPageController::class, 'index'])->name('admin.seo_pages.index');
+        Route::get('/seo-pages/create', [SeoPageController::class, 'create'])->name('admin.seo_pages.create');
+        Route::post('/seo-pages/store', [SeoPageController::class, 'store'])->name('admin.seo_pages.store');
+        Route::get('/seo-pages/{id}/edit', [SeoPageController::class, 'edit'])->name('admin.seo_pages.edit');
+        Route::put('/seo-pages/{id}/update', [SeoPageController::class, 'update'])->name('admin.seo_pages.update');
+        Route::delete('/seo-pages/{id}/delete', [SeoPageController::class, 'destroy'])->name('admin.seo_pages.destroy');
 
     });
 });
