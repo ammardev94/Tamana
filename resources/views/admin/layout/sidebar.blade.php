@@ -90,6 +90,13 @@
                             </a>
                         </li>
 
+                        <li class="@if(request()->path() == 'admin/contacts') active @endif">
+                            <a href="{{ route('admin.contacts.index') }}">
+                                <i class="ti ti-building-skyscraper"></i>
+                                <span>Contacts</span>
+                            </a>
+                        </li>
+
 
                     </ul>
                 </li>
