@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Exception;
 use Illuminate\View\View;
 use App\Models\Portfolio;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Http\Requests\PortfolioRequest;
@@ -49,6 +50,8 @@ class PortfolioController extends Controller
             return redirect()->route('admin.portfolio.index');
 
         } catch (Exception $e) {
+
+            Log::error($e->getMessage());
             Session::flash('msg.error', $e->getMessage());
             return redirect()->back()->withInput();
         }
