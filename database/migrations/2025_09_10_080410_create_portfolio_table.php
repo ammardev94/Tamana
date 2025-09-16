@@ -35,7 +35,7 @@ return new class extends Migration
             $table->string('section_one_button_text')->nullable();
             $table->string('section_one_button_file')->nullable();
             $table->string('section_four_title')->nullable();
-            $table->string('section_four_paragraph')->nullable();
+            $table->longText('section_four_paragraph')->nullable();
             $table->string('section_four_button_text')->nullable();
             $table->string('section_four_button_link')->nullable();
             $table->enum('status', ['completed', 'in-progress'])->default('in-progress');
