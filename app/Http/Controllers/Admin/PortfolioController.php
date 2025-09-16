@@ -33,6 +33,10 @@ class PortfolioController extends Controller
                 $validated['thumbnail_img'] = $request->file('thumbnail_img')->store('portfolio/thumbnails', 'public');
             }
 
+            if ($request->hasFile('section_one_button_file')) {
+                $validated['section_one_button_file'] = $request->file('section_one_button_file')->store('portfolio/sheets', 'public');
+            }
+
             if ($request->hasFile('images')) {
                 $validated['images'] = collect($request->file('images'))
                     ->map(fn($file) => $file->store('portfolio/images', 'public'))
@@ -67,6 +71,12 @@ class PortfolioController extends Controller
                 $validated['thumbnail_img'] = $request->file('thumbnail_img')->store('portfolio/thumbnails', 'public');
             }
 
+            if ($request->hasFile('section_one_button_file')) {
+                Storage::disk('public')->delete($portfolio->section_one_button_file);
+                $validated['section_one_button_file'] = $request->file('section_one_button_file')->store('portfolio/sheets', 'public');
+            }
+
+
             if ($request->hasFile('images')) {
                 if (is_array($portfolio->images)) {
                     foreach ($portfolio->images as $img) {
@@ -95,6 +105,10 @@ class PortfolioController extends Controller
 
         if ($portfolio->thumbnail_img) {
             Storage::disk('public')->delete($portfolio->thumbnail_img);
+        }
+
+        if ($portfolio->section_one_button_file) {
+            Storage::disk('public')->delete($portfolio->section_one_button_file);
         }
 
         if (is_array($portfolio->images)) {

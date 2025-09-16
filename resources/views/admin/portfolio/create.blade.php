@@ -48,13 +48,14 @@
 <div class="row">
     <div class="col-md-12">
         @include('include.messages')
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Add Portfolio</h3>
-            </div>
 
-            <form action="{{ route('admin.portfolio.store') }}" method="POST" id="addPortfolio" enctype="multipart/form-data">
-                @csrf
+        <form action="{{ route('admin.portfolio.store') }}" method="POST" id="addPortfolio" enctype="multipart/form-data">
+            @csrf
+
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Add Portfolio</h3>
+                </div>
                 <div class="card-body">
                     <div class="row">
 
@@ -137,7 +138,7 @@
                             <label for="status" class="form-label">Status</label>
                             <select class="form-select" name="status" id="status">
                                 <option value="in-progress">In Progress</option>
-                                <option value="completedss">Completed</option>
+                                <option value="completed">Completed</option>
                             </select>
                         </div>
 
@@ -155,13 +156,74 @@
 
                     </div>
                 </div>
+            </div>
 
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Section One</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_title" class="form-label">Section One Title</label>
+                            <input type="text" name="section_one_title" id="section_one_title" class="form-control" value="{{ old('section_one_title') }}" placeholder="Enter section one title">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_paragraph" class="form-label">Section One Paragraph</label>
+                            <textarea name="section_one_paragraph" id="section_one_paragraph" class="form-control" rows="4">{{ old('section_one_paragraph') }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_button_text" class="form-label">Section One Button Text</label>
+                            <input type="text" name="section_one_button_text" id="section_one_button_text" class="form-control" value="{{ old('section_one_button_text') }}" placeholder="Enter button text">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_button_file" class="form-label">Section One Button File</label>
+                            <input type="file" name="section_one_button_file" id="section_one_button_file" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Section Four</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_title" class="form-label">Section Four Title</label>
+                            <input type="text" name="section_four_title" id="section_four_title" class="form-control" value="{{ old('section_four_title') }}" placeholder="Enter section four title">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_paragraph" class="form-label">Section Four Paragraph</label>
+                            <textarea name="section_four_paragraph" id="section_four_paragraph" rows="4" placeholder="Enter section four paragraph" class="form-control" rows="4">{{ old('section_four_paragraph') }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_button_text" class="form-label">Section Four Button Text</label>
+                            <input type="text" name="section_four_button_text" id="section_four_button_text" class="form-control" value="{{ old('section_four_button_text') }}" placeholder="Enter button text">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_button_link" class="form-label">Section Four Button Link</label>
+                            <input type="url" name="section_four_button_link" id="section_four_button_link" class="form-control" value="{{ old('section_four_button_link') }}" placeholder="https://">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-primary">
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>&nbsp;&nbsp;Save</button>
                     <a href="{{ route('admin.portfolio.index') }}" class="btn btn-default"><i class="fas fa-times-circle"></i>&nbsp;&nbsp;Cancel</a>
                 </div>
-            </form>
-        </div>
+            </div>
+            
+        </form>
     </div>
 </div>
 @endsection
@@ -205,7 +267,15 @@ $(document).ready(function() {
             completion_date: { required: true },
             contract_terms: { required: true },
             awards: { required: true },
-            other_information: { required: true }
+            other_information: { required: true },
+            section_one_title: { required: true },
+            section_one_paragraph: { required: true },
+            section_one_button_text: { required: true },
+            section_one_button_file: { extension: ['pdf','doc','docx'] },
+            section_four_title: { required: true },
+            section_four_paragraph: { required: true },
+            section_four_button_text: { required: true },
+            section_four_button_link: { url: true }
         },
         messages: {
             thumbnail_img: { required: "Please upload thumbnail image", extension: "Only jpg, jpeg, png, webp allowed" },
@@ -224,7 +294,15 @@ $(document).ready(function() {
             completion_date: { required: "Please enter completion date" },
             contract_terms: { required: "Please enter contract terms" },
             awards: { required: "Please enter awards" },
-            other_information: { required: "Please enter other information" }
+            other_information: { required: "Please enter other information" },
+            section_one_title: { required: "Please enter section one title" },
+            section_one_paragraph: { required: "Please enter section one paragraph" },
+            section_one_button_text: { required: "Please enter button text" },
+            section_one_button_file: { extension: "Only PDF/DOC allowed" },
+            section_four_title: { required: "Please enter section four title" },
+            section_four_paragraph: { required: "Please enter section four paragraph" },
+            section_four_button_text: { required: "Please enter button text" },
+            section_four_button_link: { url: "Please enter a valid URL" }
         },
         errorElement: "label",
         validClass: "is-valid",
@@ -261,6 +339,30 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         });
     });
+
+
+    $('#section_one_paragraph').summernote({
+        height: 200,
+        placeholder: 'Enter section one paragraph',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['view', ['codeview']]
+        ]
+    });
+
+    $('#section_four_paragraph').summernote({
+        height: 200,
+        placeholder: 'Enter section four paragraph',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['view', ['codeview']]
+        ]
+    });
+
 });
 </script>
 @endsection

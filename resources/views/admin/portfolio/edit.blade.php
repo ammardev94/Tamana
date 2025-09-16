@@ -48,80 +48,94 @@
 <div class="row">
     <div class="col-md-12">
         @include('include.messages')
-        <div class="card card-primary">
-            <div class="card-header">
-                <h3 class="card-title">Edit Portfolio</h3>
-            </div>
+        <form action="{{ route('admin.portfolio.update', $portfolio->id) }}" method="POST" id="editPortfolio" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
 
-            <form action="{{ route('admin.portfolio.update', $portfolio->id) }}" method="POST" id="editPortfolio" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Edit Portfolio</h3>
+                </div>
+
                 <div class="card-body">
                     <div class="row">
-
+                        {{-- General Fields --}}
                         <div class="col-md-6 mb-3">
                             <label for="title" class="form-label">Title</label>
-                            <input type="text" name="title" id="title" class="form-control" value="{{ old('title', $portfolio->title) }}" placeholder="Enter title">
+                            <input type="text" name="title" id="title" class="form-control" 
+                                value="{{ old('title', $portfolio->title) }}" placeholder="Enter title">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="location" class="form-label">Location</label>
-                            <input type="text" name="location" id="location" class="form-control" value="{{ old('location', $portfolio->location) }}" placeholder="Enter location">
+                            <input type="text" name="location" id="location" class="form-control" 
+                                value="{{ old('location', $portfolio->location) }}" placeholder="Enter location">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="client" class="form-label">Client</label>
-                            <input type="text" name="client" id="client" class="form-control" value="{{ old('client', $portfolio->client) }}" placeholder="Enter client name">
+                            <input type="text" name="client" id="client" class="form-control" 
+                                value="{{ old('client', $portfolio->client) }}" placeholder="Enter client name">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="value" class="form-label">Value</label>
-                            <input type="text" name="value" id="value" class="form-control" value="{{ old('value', $portfolio->value) }}" placeholder="Enter project value">
+                            <input type="text" name="value" id="value" class="form-control" 
+                                value="{{ old('value', $portfolio->value) }}" placeholder="Enter project value">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="consortium" class="form-label">Consortium</label>
-                            <input type="text" name="consortium" id="consortium" class="form-control" value="{{ old('consortium', $portfolio->consortium) }}" placeholder="Enter consortium">
+                            <input type="text" name="consortium" id="consortium" class="form-control" 
+                                value="{{ old('consortium', $portfolio->consortium) }}" placeholder="Enter consortium">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="tanama_role" class="form-label">Tanama Role</label>
-                            <input type="text" name="tanama_role" id="tanama_role" class="form-control" value="{{ old('tanama_role', $portfolio->tanama_role) }}" placeholder="Enter Tanama role">
+                            <input type="text" name="tanama_role" id="tanama_role" class="form-control" 
+                                value="{{ old('tanama_role', $portfolio->tanama_role) }}" placeholder="Enter Tanama role">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="builder" class="form-label">Builder</label>
-                            <input type="text" name="builder" id="builder" class="form-control" value="{{ old('builder', $portfolio->builder) }}" placeholder="Enter builder name">
+                            <input type="text" name="builder" id="builder" class="form-control" 
+                                value="{{ old('builder', $portfolio->builder) }}" placeholder="Enter builder name">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="architect" class="form-label">Architect</label>
-                            <input type="text" name="architect" id="architect" class="form-control" value="{{ old('architect', $portfolio->architect) }}" placeholder="Enter architect name">
+                            <input type="text" name="architect" id="architect" class="form-control" 
+                                value="{{ old('architect', $portfolio->architect) }}" placeholder="Enter architect name">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="financial_close_date" class="form-label">Financial Close Date</label>
-                            <input type="text" name="financial_close_date" id="financial_close_date" class="form-control" value="{{ old('financial_close_date', $portfolio->financial_close_date) }}" placeholder="e.g. May 2018">
+                            <input type="text" name="financial_close_date" id="financial_close_date" class="form-control" 
+                                value="{{ old('financial_close_date', $portfolio->financial_close_date) }}" placeholder="e.g. May 2018">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="completion_date" class="form-label">Completion Date</label>
-                            <input type="text" name="completion_date" id="completion_date" class="form-control" value="{{ old('completion_date', $portfolio->completion_date) }}" placeholder="e.g. September 2020">
+                            <input type="text" name="completion_date" id="completion_date" class="form-control" 
+                                value="{{ old('completion_date', $portfolio->completion_date) }}" placeholder="e.g. September 2020">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="contract_terms" class="form-label">Contract Terms</label>
-                            <input type="text" name="contract_terms" id="contract_terms" class="form-control" value="{{ old('contract_terms', $portfolio->contract_terms) }}" placeholder="Enter contract terms">
+                            <input type="text" name="contract_terms" id="contract_terms" class="form-control" 
+                                value="{{ old('contract_terms', $portfolio->contract_terms) }}" placeholder="Enter contract terms">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="awards" class="form-label">Awards</label>
-                            <input type="text" name="awards" id="awards" class="form-control" value="{{ old('awards', $portfolio->awards) }}" placeholder="Enter awards">
+                            <input type="text" name="awards" id="awards" class="form-control" 
+                                value="{{ old('awards', $portfolio->awards) }}" placeholder="Enter awards">
                         </div>
 
                         <div class="col-md-6 mb-3">
                             <label for="map_url" class="form-label">Map URL</label>
-                            <input type="url" name="map_url" id="map_url" class="form-control" value="{{ old('map_url', $portfolio->map_url) }}" placeholder="http://">
+                            <input type="url" name="map_url" id="map_url" class="form-control" 
+                                value="{{ old('map_url', $portfolio->map_url) }}" placeholder="http://">
                         </div>
 
                         <div class="col-md-12 mb-3">
@@ -142,36 +156,112 @@
                             </select>
                         </div>
 
-
+                        {{-- Thumbnail --}}
                         <div class="col-md-6 mb-3">
                             <label for="thumbnail_img" class="form-label">Thumbnail Image</label>
                             <input type="file" name="thumbnail_img" id="thumbnail_img" class="form-control">
                             @if($portfolio->thumbnail_img)
-                                <img src="{{ asset('storage/'. $portfolio->thumbnail_img) }}" alt="Thumbnail" style="max-width: 100%; height: 200px;">
+                                <img src="{{ asset('storage/'. $portfolio->thumbnail_img) }}" alt="Thumbnail" 
+                                    style="max-width: 100%; height: 200px;">
                             @endif
                         </div>
 
+                        {{-- Gallery --}}
                         <div class="col-md-6 mb-3">
                             <label for="images" class="form-label">Gallery Images (Multiple)</label>
                             <input type="file" name="images[]" id="images" class="form-control" multiple>
                             <div id="preview-images" class="mt-2">
                                 @if(!empty($portfolio->images))
                                     @foreach($portfolio->images as $img)
-                                        <img src="{{ asset('storage/'. $img) }}" style="max-width: 100px; height: 100px; margin: 5px;">
+                                        <img src="{{ asset('storage/'. $img) }}" 
+                                            style="max-width: 100px; height: 100px; margin: 5px;">
                                     @endforeach
                                 @endif
                             </div>
                         </div>
-
                     </div>
                 </div>
+            </div>
 
+            {{-- Section One --}}
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Section One</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_title" class="form-label">Section One Title</label>
+                            <input type="text" name="section_one_title" id="section_one_title" class="form-control" 
+                                value="{{ old('section_one_title', $portfolio->section_one_title) }}" placeholder="Enter section one title">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_paragraph" class="form-label">Section One Paragraph</label>
+                            <textarea name="section_one_paragraph" id="section_one_paragraph" rows="4" 
+                                    class="form-control" placeholder="Enter section one paragraph">{{ old('section_one_paragraph', $portfolio->section_one_paragraph) }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_button_text" class="form-label">Section One Button Text</label>
+                            <input type="text" name="section_one_button_text" id="section_one_button_text" class="form-control" 
+                                value="{{ old('section_one_button_text', $portfolio->section_one_button_text) }}" placeholder="Enter button text">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_one_button_file" class="form-label">Section One Button File</label>
+                            <input type="file" name="section_one_button_file" id="section_one_button_file" class="form-control">
+                            @if($portfolio->section_one_button_file)
+                                <a href="{{ asset('storage/'. $portfolio->section_one_button_file) }}" target="_blank" class="d-block mt-2">
+                                    View File
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Section Four --}}
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Section Four</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_title" class="form-label">Section Four Title</label>
+                            <input type="text" name="section_four_title" id="section_four_title" class="form-control" 
+                                value="{{ old('section_four_title', $portfolio->section_four_title) }}" placeholder="Enter section four title">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_paragraph" class="form-label">Section Four Paragraph</label>
+                            <textarea name="section_four_paragraph" id="section_four_paragraph" rows="4" class="form-control" 
+                                    placeholder="Enter section four paragraph">{{ old('section_four_paragraph', $portfolio->section_four_paragraph) }}</textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_button_text" class="form-label">Section Four Button Text</label>
+                            <input type="text" name="section_four_button_text" id="section_four_button_text" class="form-control" 
+                                value="{{ old('section_four_button_text', $portfolio->section_four_button_text) }}" placeholder="Enter button text">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label for="section_four_button_link" class="form-label">Section Four Button Link</label>
+                            <input type="url" name="section_four_button_link" id="section_four_button_link" class="form-control" 
+                                value="{{ old('section_four_button_link', $portfolio->section_four_button_link) }}" placeholder="https://">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card card-primary">
                 <div class="card-footer">
                     <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i>&nbsp;&nbsp;Save</button>
                     <a href="{{ route('admin.portfolio.index') }}" class="btn btn-default"><i class="fas fa-times-circle"></i>&nbsp;&nbsp;Cancel</a>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
     </div>
 </div>
 @endsection
@@ -215,7 +305,15 @@ $(document).ready(function() {
             completion_date: { required: true },
             contract_terms: { required: true },
             awards: { required: true },
-            other_information: { required: true }
+            other_information: { required: true },
+            section_one_title: { required: true },
+            section_one_paragraph: { required: true },
+            section_one_button_text: { required: true },
+            section_one_button_file: { extension: ['pdf','doc','docx'] },
+            section_four_title: { required: true },
+            section_four_paragraph: { required: true },
+            section_four_button_text: { required: true },
+            section_four_button_link: { url: true }
         },
         messages: {
             thumbnail_img: { extension: "Only jpg, jpeg, png, webp allowed" },
@@ -234,7 +332,15 @@ $(document).ready(function() {
             completion_date: { required: "Please enter completion date" },
             contract_terms: { required: "Please enter contract terms" },
             awards: { required: "Please enter awards" },
-            other_information: { required: "Please enter other information" }
+            other_information: { required: "Please enter other information" },
+            section_one_title: { required: "Please enter section one title" },
+            section_one_paragraph: { required: "Please enter section one paragraph" },
+            section_one_button_text: { required: "Please enter button text" },
+            section_one_button_file: { extension: "Only PDF/DOC allowed" },
+            section_four_title: { required: "Please enter section four title" },
+            section_four_paragraph: { required: "Please enter section four paragraph" },
+            section_four_button_text: { required: "Please enter button text" },
+            section_four_button_link: { url: "Please enter a valid URL" }
         },
         errorElement: "label",
         validClass: "is-valid",
@@ -271,6 +377,30 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         });
     });
+
+    $('#section_one_paragraph').summernote({
+        height: 200,
+        placeholder: 'Enter section one paragraph',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['view', ['codeview']]
+        ]
+    });
+
+    $('#section_four_paragraph').summernote({
+        height: 200,
+        placeholder: 'Enter section four paragraph',
+        toolbar: [
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+            ['view', ['codeview']]
+        ]
+    });
+
+
 });
 </script>
 @endsection

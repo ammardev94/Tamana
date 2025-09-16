@@ -30,6 +30,14 @@ return new class extends Migration
             $table->string('contract_terms')->nullable();
             $table->string('awards')->nullable();
             $table->text('other_information')->nullable();
+            $table->string('section_one_title')->nullable();
+            $table->longText('section_one_paragraph')->nullable();
+            $table->string('section_one_button_text')->nullable();
+            $table->string('section_one_button_file')->nullable();
+            $table->string('section_four_title')->nullable();
+            $table->string('section_four_paragraph')->nullable();
+            $table->string('section_four_button_text')->nullable();
+            $table->string('section_four_button_link')->nullable();
             $table->enum('status', ['completed', 'in-progress'])->default('in-progress');
             $table->timestamps();
         });

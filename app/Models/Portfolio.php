@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 
 class Portfolio extends Model
 {
@@ -29,11 +29,18 @@ class Portfolio extends Model
         'contract_terms',
         'awards',
         'other_information',
+        'section_one_title',
+        'section_one_paragraph',
+        'section_one_button_text',
+        'section_one_button_file',
+        'section_four_title',
+        'section_four_paragraph',
+        'section_four_button_text',
+        'section_four_button_link',
         'status',
     ];
 
     protected $casts = [
         'images' => 'array',
     ];
-
 }

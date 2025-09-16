@@ -17,14 +17,11 @@ class PortfolioRequest extends FormRequest
 
         return [
             'thumbnail_img' => $isUpdate
-                ? 'nullable|image|mimes:jpeg,png,jpg,webp|max:20480'
-                : 'required|image|mimes:jpeg,png,jpg,webp|max:20480',
+                ? 'nullable|image|mimes:jpeg,png,jpg,webp|max:40480'
+                : 'required|image|mimes:jpeg,png,jpg,webp|max:40480',
 
-            'images' => $isUpdate
-                ? 'nullable|array'
-                : 'nullable|array',
-
-            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:20480',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,webp|max:40480',
 
             'title' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
@@ -42,6 +39,16 @@ class PortfolioRequest extends FormRequest
             'awards' => 'nullable|string|max:255',
             'other_information' => 'nullable|string|max:500',
             'status' => 'string|in:in-progress,completed',
+            'section_one_title' => 'nullable|string|max:255',
+            'section_one_paragraph' => 'nullable|string',
+            'section_one_button_text' => 'nullable|string|max:255',
+            'section_one_button_file' => $isUpdate
+                ? 'nullable|file|mimes:pdf,docx|max:40480'
+                : 'required|file|mimes:pdf,docx|max:40480',
+            'section_four_title' => 'nullable|string|max:255',
+            'section_four_paragraph' => 'nullable|string',
+            'section_four_button_text' => 'nullable|string|max:255',
+            'section_four_button_link' => 'nullable|url|max:255',
         ];
     }
 
@@ -50,6 +57,14 @@ class PortfolioRequest extends FormRequest
         return [
             'thumbnail_img' => 'thumbnail image',
             'images' => 'portfolio images',
+            'section_one_title' => 'section one title',
+            'section_one_paragraph' => 'section one paragraph',
+            'section_one_button_text' => 'section one button text',
+            'section_one_button_file' => 'section one button file',
+            'section_four_title' => 'section four title',
+            'section_four_paragraph' => 'section four paragraph',
+            'section_four_button_text' => 'section four button text',
+            'section_four_button_link' => 'section four button link',
         ];
     }
 }
