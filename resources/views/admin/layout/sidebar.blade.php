@@ -83,6 +83,13 @@
                             </a>
                         </li>
 
+                        <li class="@if(request()->path() == 'admin/careers') active @endif">
+                            <a href="{{ route('admin.careers.index') }}">
+                                <i class="ti ti-building-skyscraper"></i>
+                                <span>Careers</span>
+                            </a>
+                        </li>
+
 
                     </ul>
                 </li>
